@@ -25,7 +25,7 @@ app.use(express.static("build"));
 // -------------------------------------------------
 
 // MongoDB configuration (Change this URL to your own DB)
-mongoose.connect("mongodb://localhost/nytreact");
+mongoose.connect("mongodb://localhost/nytdb");
 var db = mongoose.connection;
 
 db.on("error", function(err) {
@@ -38,47 +38,59 @@ db.once("open", function() {
 
 // -------------------------------------------------
 
-
 // Main "/" Route. This will redirect the user to our rendered React application
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/build/static/index.html");
 });
 
+
+
 // ROUTES
 // ======
-
-
-app.get("/search", function(req, res) {
-  res.sendFile(__dirname + "/build/static/index.html");
-});
-
-
-// This is the route we will send POST requests to save each click.
-// We will call this route the moment the "click" or "reset" button is pressed.
-app.post("/api", function(req, res) {
-
-  var clickID = req.body.clickID;
-  var clicks = parseInt(req.body.clicks);
-
-  // Note how this route utilizes the findOneAndUpdate function to update the clickCount
-  // { upsert: true } is an optional object we can pass into the findOneAndUpdate method
-  // If included, Mongoose will create a new document matching the description if one is not found
-  Click.findOneAndUpdate({
-    clickID: clickID
-  }, {
-    $set: {
-      clicks: clicks
-    }
-  }, { upsert: true }).exec(function(err) {
-
+app.get("/api", function(req, res) {
+  Article.find({}).exec(function(err, doc) {
     if (err) {
       console.log(err);
     }
     else {
-      res.send("Updated Click Count!");
+      console.log(doc);
+      res.json(doc);
     }
   });
 });
+
+// This is the route we will send POST requests to save each click.
+// We will call this route the moment the "click" or "reset" button is pressed.
+app.post("/api/post", function(req, res) {
+  console.log(req.body)
+  var newArticle = new Article(req.body)
+
+  newArticle.save(function(err) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send("Article Saved");
+    }
+  });
+});
+
+
+
+app.delete("/api/post/:id", function(req, res) {
+  console.log(req.params.name)
+  Article.remove({_id: req.params.name}).exec(function(err, doc) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      console.log(doc);
+      res.json(doc);
+    }
+  });
+});
+
+
 
 // -------------------------------------------------
 

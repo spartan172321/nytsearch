@@ -6,25 +6,23 @@ var Schema = mongoose.Schema;
 // Create article schema
 var ArticleSchema = new Schema({
   // title is a required string
-  title: {
+  headline: {
     type: String,
     required: true
   },
   // publish date of the article
-  date: {
-    type: Date,
+  url: {
+    type: String,
     required: true,
-    default: false
   },
   // url is a required string
-  url: {
+  pubDate: {
     type: String,
     required: true
   },
   // saved or not
   saved: {
-    type: Boolean,
-    default: false
+    type: Boolean
   }
 });
 

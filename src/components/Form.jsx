@@ -5,13 +5,14 @@ import React, {Component} from 'react';
 // import Post from './containers/Post';
 
 class Form extends Component {
-	constructor(props){
-		super(props);
+	constructor(){
+		super();
 
 		this.state = {
 			topic: "",
       start: 0,
-      end: 0
+      end: 0,
+      saved: false
 		};
 	};
 
@@ -26,21 +27,14 @@ class Form extends Component {
 
   handleSubmit = event => {
   	event.preventDefault()
-
-  	console.log("event.target")
-
-  	console.log(event.target)
   	
 		this.props.makeRequest(
 			this.state.topic,
 			this.state.start,
 			this.state.end
 		)
-
-
 	};
   
-
 	render() {
 		return (
 			<div className="container">
