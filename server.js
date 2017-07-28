@@ -78,8 +78,12 @@ app.post("/api/post", function(req, res) {
 
 
 app.delete("/api/post/:id", function(req, res) {
-  console.log(req.params.name)
-  Article.remove({_id: req.params.name}).exec(function(err, doc) {
+  console.log("at server ")
+  console.log(req.params)
+
+  console.log(req.params.id)
+
+  Article.remove({_id: req.params.id}).exec(function(err, doc) {
     if (err) {
       console.log(err);
     }
@@ -89,7 +93,6 @@ app.delete("/api/post/:id", function(req, res) {
     }
   });
 });
-
 
 
 // -------------------------------------------------

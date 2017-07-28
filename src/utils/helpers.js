@@ -8,7 +8,7 @@ const helper = {
 	displayArticles: function() {
 		console.log("articles posted")
     return axios.get("/api");
-  },
+  }, 
 
   saveArticle: function(articleData) {
   	console.log("articles received")
@@ -17,7 +17,9 @@ const helper = {
 
   deleteArticle: function(data) {
   	console.log(data)
-    return axios.post("/api/post/:id", data);
+    console.log("at helper")
+    // return axios.delete("/api/post/"+data, {});
+    return axios.delete("/api/post/"+data, {});
   }
 };
 

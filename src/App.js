@@ -49,13 +49,16 @@ class App extends Component {
 			this.setState({saveDisplay: saveArr})
 		}.bind(this));
 	}
-
+// ====================================
 	appDeleteClick = eve => {
 		eve.preventDefault();
 		var del = eve.target.name
-		console.log(del)
+		// console.log(del)
+		console.log("at App")
 		helpers.deleteArticle(del)
 	}
+
+
 
 
   appSaveClick = e => {
