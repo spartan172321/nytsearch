@@ -7,12 +7,4 @@ import App from './App'
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
-// only one parent is allowed in the render()
-// ReactDOM.render(
-// 	<BrowserRouter>
-// 		<App />
-// 	</BrowserRouter>,
-// 	document.getElementById('root')
-// )
-
 
