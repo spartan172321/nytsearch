@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
-// Scrape vars
+
 var Article = require("./models/Article.js");
 
 
@@ -25,8 +25,17 @@ app.use(express.static("build"));
 // -------------------------------------------------
 
 // MongoDB configuration (Change this URL to your own DB)
-mongoose.connect("mongodb://localhost/nytdb");
+
+
+if (process.env.MONGODB_URI){
+  mongoose.connect(process.env.MONGODB_URI);
+}
+else{
+  mongoose.connect("mongodb://localhost/nytdb");
+}
+
 var db = mongoose.connection;
+
 
 db.on("error", function(err) {
   console.log("Mongoose Error: ", err);
