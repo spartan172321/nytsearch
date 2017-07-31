@@ -24,13 +24,15 @@ app.use(express.static("build"));
 
 // -------------------------------------------------
 
-// MongoDB configuration (Change this URL to your own DB)
 
+var MONGODB_URI = "mongodb://heroku_fd0jcg6k:l8kq7i8qtfuchoh9m621uv8l7i@ds127983.mlab.com:27983/heroku_fd0jcg6k"
 
 if (process.env.MONGODB_URI){
+  console.log("Connected to mLab");
   mongoose.connect(process.env.MONGODB_URI);
 }
 else{
+  console.log("Not connected to mLab");
   mongoose.connect("mongodb://localhost/nytdb");
 }
 
