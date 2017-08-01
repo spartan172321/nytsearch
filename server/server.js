@@ -70,8 +70,7 @@ app.get("/api", function(req, res) {
   });
 });
 
-// This is the route we will send POST requests to save each click.
-// We will call this route the moment the "click" or "reset" button is pressed.
+// This is the route we will send POST requests
 app.post("/api/post", function(req, res) {
   console.log(req.body)
   var newArticle = new Article(req.body)
