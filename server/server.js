@@ -25,11 +25,11 @@ app.use(express.static("build"));
 // -------------------------------------------------
 
 
-// var MONGODB_URI = "mongodb://heroku_fd0jcg6k:l8kq7i8qtfuchoh9m621uv8l7i@ds127983.mlab.com:27983/heroku_fd0jcg6k"
+var MONGODB_URI = "mongodb://heroku_fd0jcg6k:l8kq7i8qtfuchoh9m621uv8l7i@ds127983.mlab.com:27983/heroku_fd0jcg6k"
 
-if (process.env.MONGODB_URI){
+if (MONGODB_URI){
   console.log("Connected to mLab");
-  mongoose.connect(process.env.MONGODB_URI);
+  mongoose.connect(MONGODB_URI);
 }
 else{
   console.log("Not connected to mLab");
@@ -54,6 +54,8 @@ db.once("open", function() {
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/build/static/index.html");
 });
+
+app.get("/", function(req, res) { res.sendFile(__dirname + "/build/static/index.html"); });
 
 
 // ROUTES
