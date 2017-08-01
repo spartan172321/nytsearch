@@ -27,9 +27,11 @@ app.use(express.static("build"));
 
 var MONGODB_URI = "mongodb://heroku_fd0jcg6k:l8kq7i8qtfuchoh9m621uv8l7i@ds127983.mlab.com:27983/heroku_fd0jcg6k"
 
-if (MONGODB_URI){
+// mongodb://heroku_fd0jcg6k:l8kq7i8qtfuchoh9m621uv8l7i@ds127983.mlab.com:27983/heroku_fd0jcg6k
+
+if ("mongodb://heroku_fd0jcg6k:l8kq7i8qtfuchoh9m621uv8l7i@ds127983.mlab.com:27983/heroku_fd0jcg6k"){
   console.log("Connected to mLab");
-  mongoose.connect(MONGODB_URI);
+  mongoose.connect("mongodb://heroku_fd0jcg6k:l8kq7i8qtfuchoh9m621uv8l7i@ds127983.mlab.com:27983/heroku_fd0jcg6k");
 }
 else{
   console.log("Not connected to mLab");
@@ -51,11 +53,7 @@ db.once("open", function() {
 
 // Main "/" Route. This will redirect the user to our rendered React application
 
-app.get("/", function(req, res) {
-  res.sendFile(__dirname + "/build/static/index.html");
-});
-
-app.get("/", function(req, res) { res.sendFile(__dirname + "/build/static/index.html"); });
+app.get("/", function(req, res) {res.sendFile(__dirname + "/build/static/index.html")});
 
 
 // ROUTES
